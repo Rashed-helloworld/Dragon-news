@@ -4,7 +4,7 @@ import userLogo from "../assets/user.png";
 import { AuthContext } from "../Provider/AuthProvider";
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
-  const hanleLogout = () => {
+  const handleLogout = () => {
     logOut()
     .then( () => {
       console.log('Logged Out Successfully');
@@ -21,10 +21,11 @@ const Navbar = () => {
         <NavLink to="/about">About</NavLink>
         <NavLink to="/career">Career</NavLink>
       </div>
-      <div className="login-btn flex gap-5">
-        <img src={userLogo} alt="" />
+      <div className="login-btn flex justify-center items-center gap-5">
+        <p className="text-xs font-bold">{ user ? user.displayName : ''}</p>
+        <img className="w-12 rounded-full" src={`${user ? user.photoURL : userLogo}`} alt="" />
         {
-          user ? <button onClick={hanleLogout} className="btn btn-primary
+          user ? <button onClick={handleLogout} className="btn btn-primary
          px-10 ">Log Out</button> : <Link to={'/auth/login'} className="btn btn-primary
          px-10 ">Log In</Link>
         }
